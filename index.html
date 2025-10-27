@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/tewetech/wedding-invitation-tri-chusnul/refs/heads/main/favicon5.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persiapan Kita | Tewe Tech</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-primary': 'var(--bg-primary)', 
+                        'text-main': 'var(--text-main)', 
+                        'accent-1': 'var(--accent-1)', 
+                        'accent-2': 'var(--accent-2)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg-primary: #f0f0f0; 
+            --bg-card: rgba(255, 255, 255, 0.8); 
+            --text-main: #333333; 
+            --text-subtle: #6a6a6a; 
+            --accent-1: #008c7a; 
+            --accent-2: #cc4d1f; 
+            --border-color: rgba(0, 0, 0, 0.1); 
+            --shadow-heavy: rgba(0, 0, 0, 0.15); 
+
+            --card-br: 12px; 
+            --transition-speed: 0.5s; 
+            
+            --color-cursor: #008c7a; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            background-color: var(--bg-primary); 
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle 800px at 15% 15%, #e0e0e0 0%, var(--bg-primary) 40%, transparent 60%) no-repeat,
+                        radial-gradient(circle 600px at 85% 20%, #e8e8e8 0%, transparent 60%) no-repeat,
+                        radial-gradient(circle 700px at 40% 85%, #e0e0e0 0%, transparent 60%) no-repeat;
+            opacity: 1; 
+            z-index: -2;
+            animation: pulseBg 15s infinite ease-in-out alternate;
+            transition: opacity var(--transition-speed);
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(to right, var(--border-color) 0 1px, transparent 1px 24px),
+                        repeating-linear-gradient(to bottom, var(--border-color) 0 1px, transparent 1px 24px);
+            z-index: -1;
+            mask-image: radial-gradient(1200px 700px at 50% 40%, #000 0%, transparent 75%);
+            opacity: 1; 
+            transition: background var(--transition-speed);
+        }
+
+        @keyframes pulseBg {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .link-container-card {
+            background-color: var(--bg-card);
+            border-radius: var(--card-br);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px 0 var(--shadow-heavy);
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            
+            width: 90%;
+            max-width: 500px; 
+            
+            padding: 30px;
+            text-align: center;
+        }
+
+        .link-container-card h1 {
+            color: var(--accent-2); 
+            font-weight: 700;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem; 
+            transition: all 0.3s ease;
+            text-decoration: none;
+            
+            height: 50px; 
+            background-color: rgba(255, 255, 255, 0.6); 
+            color: var(--color-cursor); 
+            border: 1px solid var(--color-cursor); 
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            flex-shrink: 0; 
+            font-family: 'Poppins', sans-serif; 
+            gap: 8px; 
+        }
+
+        .link-button:hover {
+            background-color: var(--color-cursor); 
+            color: var(--bg-primary); 
+            border-color: var(--color-cursor);
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 6px -1px rgba(0, 140, 122, 0.3), 0 2px 4px -2px rgba(0, 140, 122, 0.3); 
+        }
+
+        .link-button:active {
+            transform: translateY(0); 
+            box-shadow: none;
+        }
+
+        .link-button i {
+            font-size: 1.2em;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100; 
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: var(--card-br);
+            box-shadow: 0 10px 40px var(--shadow-heavy);
+            width: 90%;
+            max-width: 400px;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: border-color 0.3s;
+        }
+
+        .modal-content input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-buttons .close-btn {
+            background-color: var(--text-subtle);
+            color: white;
+        }
+
+        .modal-buttons .close-btn:hover {
+            background-color: #555;
+        }
+
+        .modal-buttons .submit-btn {
+            background-color: var(--accent-1);
+            color: white;
+        }
+
+        .modal-buttons .submit-btn:hover {
+            background-color: #007a67;
+        }
+
+        @media (max-width: 650px) { 
+            .link-container-card {
+                padding: 20px;
+            }
+            .link-container-card h1 {
+                font-size: 2em;
+            }
+            .link-button {
+                padding: 0.8rem 1rem;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="link-container-card">
+
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center mb-4 tracking-tight">
+            <span class="text-accent-1">Persiapan</span> Kita
+        </h1>
+        <p class="text-center mb-10 text-text-subtle">
+            semua kebutuhan kita ada disni.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 md:gap-6" id="link-container">
+            
+            <div id="wedding-link" class="link-button group cursor-pointer">
+                <i class="fas fa-ring"></i> <span class="ml-2 font-semibold">Wedding</span>
+            </div>
+
+            <a href="https://tewetech.github.io/keuangankita" target="_blank" class="link-button group">
+                <i class="fa-solid fa-wallet"></i> <span class="ml-2 font-semibold">Keuangan</span>
+            </a>     
+
+            <a href="https://tewetech.github.io/tamuonline" target="_blank" class="link-button group">
+                <i class="fa-solid fa-address-card"></i> <span class="ml-2 font-semibold">Online</span>
+            </a>           
+
+            <a href="https://tewetech.github.io/tamuoffline" target="_blank" class="link-button group">
+                <i class="fa-solid fa-envelope-open"></i> <span class="ml-2 font-semibold">Offline</span>
+            </a>     
+        </div>
+        
+        <p class="text-center mt-10 text-xs text-text-subtle">
+            &copy; Tewe Tech | Tri Wantoro | 2025
+        </p>
+
+    </div> 
+    
+    <div id="wedding-modal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-xl font-bold mb-4 text-text-main">Tulis Nama Tamu Undangan</h3>
+            <p class="text-sm mb-4 text-text-subtle">Nama ini akan digunakan pada undangan digital Anda.</p>
+            <input type="text" id="guest-name-input" placeholder="Contoh: Ilyas Hanafi" autofocus>
+            
+            <div class="modal-buttons">
+                <button type="button" class="close-btn" id="close-modal-btn">Batal</button>
+                <button type="button" class="submit-btn" id="open-wedding-link-btn">Buka Undangan</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        const linkButtons = document.querySelectorAll('.link-button'); 
+        const weddingLinkButton = document.getElementById('wedding-link'); 
+        const weddingModal = document.getElementById('wedding-modal'); 
+        const closeModalBtn = document.getElementById('close-modal-btn'); 
+        const openWeddingLinkBtn = document.getElementById('open-wedding-link-btn'); 
+        const guestNameInput = document.getElementById('guest-name-input'); 
+        const weddingBaseURL = "https://tewetech.github.io/wedding-of-chusnul-tri/"; 
+
+        linkButtons.forEach(button => {
+            if (button.id !== 'wedding-link') { 
+                button.addEventListener('click', (event) => {
+                    const url = button.getAttribute('href');
+                    const nameSpan = button.querySelector('span:last-child');
+                    const name = nameSpan ? nameSpan.textContent : 'Link';
+                    
+                    console.log(`Membuka tautan: ${name} (${url})`);
+                });
+            }
+        });
+
+        console.log("Website Gerbang Akses Digital siap digunakan.");
+
+        const openModal = () => {
+            weddingModal.classList.add('open');
+            guestNameInput.focus(); 
+        };
+
+        const closeModal = () => {
+            weddingModal.classList.remove('open');
+            guestNameInput.value = ''; 
+        };
+
+        const openWeddingLink = () => {
+            const guestName = guestNameInput.value.trim(); 
+            let finalURL = weddingBaseURL; 
+
+            if (guestName) {
+                const encodedName = encodeURIComponent(guestName);
+                finalURL = `${weddingBaseURL}?to=${encodedName}`;
+                console.log(`Membuka tautan Wedding kustom: ${guestName} (${finalURL})`);
+            } else {
+                console.log(`Membuka tautan Wedding dasar karena nama kosong: (${finalURL})`);
+            }
+            
+            window.open(finalURL, '_blank');
+            closeModal();
+        };
+
+        weddingLinkButton.addEventListener('click', openModal);
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        openWeddingLinkBtn.addEventListener('click', openWeddingLink);
+
+        weddingModal.addEventListener('click', (event) => {
+            if (event.target === weddingModal) {
+                closeModal();
+            }
+        });
+        
+        guestNameInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                openWeddingLink();
+            }
+        });
+    </script>
+</body>
+</html>
